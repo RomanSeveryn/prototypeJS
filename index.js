@@ -9,6 +9,7 @@ function MyPrototype() {
 
 
 
+
   // MyArray.prototype.pop(); // tip: delete
   this.pop = function pop() {
     if (this.length === 0) {
@@ -19,17 +20,23 @@ function MyPrototype() {
     return lastItem;
   };
 
-  
+
+
+
   // MyArray.prototype.concat();
   this.concat = function concat(arr) {
-    for(let i = 0; i < arr.length; i++) {
-      this[this.length++] = arr[i];
+    const newMyArr = [];
+    for (let i = 0; i < arr.length; i++) {
+      this.push(arr[i]);
+      for (let i = 0; i < this.length; i++) {
+        newMyArr[i] = this[i];
+      }
     }
-    return this;
-  }
-  
-
+    return newMyArr;
+  };
 }
+
+
 
 function MyArray() {
   this.length = 0;
@@ -39,14 +46,12 @@ function MyArray() {
   }
   // MyArray.isMyArray(arg);  // подсказка: instanceof
   this.isMyArray = function isMyArray(arg) {
-    arg = new MyArray();
     return arg instanceof MyArray;
   };
 }
 
 
+
 MyArray.prototype = new MyPrototype();
-
 const arr1 = new MyArray(1, 2);
-
-
+const arr2 = new MyArray(3, 4);
