@@ -34,6 +34,13 @@ function MyPrototype() {
     }
     return newMyArr;
   };
+
+
+  this.forEach = function forEach(func) {
+    for(let i = 0; i < this.length; i++) {
+      func(this[i], i, this);
+    }
+  };
 }
 
 
@@ -55,3 +62,6 @@ function MyArray() {
 MyArray.prototype = new MyPrototype();
 const arr1 = new MyArray(1, 2);
 const arr2 = new MyArray(3, 4);
+
+
+
