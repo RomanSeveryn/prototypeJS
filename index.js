@@ -23,7 +23,6 @@ function MyPrototype() {
 
   this.shift = function shift() {
     
-    const copy = [];
     const firstItem = this[0];
     delete this[0];
     
