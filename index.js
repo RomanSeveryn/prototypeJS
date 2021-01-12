@@ -21,7 +21,15 @@ function MyPrototype() {
   };
 
 
-
+  this.shift = function shift() {
+    
+    const copy = [];
+    const firstItem = this[0];
+    delete this[0];
+    
+    return firstItem;
+  }
+  
 
   // MyArray.prototype.concat();
   this.concat = function concat(arr) {
@@ -35,12 +43,29 @@ function MyPrototype() {
     return newMyArr;
   };
 
+  this.reverse = function () {
+    const copy = Object.assign(new MyArray(), this);
+
+    for(let i = 0; i < this.length; i++) {
+      this[i] = copy[copy.length - 1 - i];
+    }
+    return this;
+  };
+
 
   this.forEach = function forEach(func) {
     for(let i = 0; i < this.length; i++) {
       func(this[i], i, this);
     }
   };
+
+  this.map = function(cb) {
+    const result = new MyArray();
+    for(let i = 0; i < this.length; i++) {
+      result.push(cb(this[i], i, this));
+    }
+    return result;
+  };  
 }
 
 
@@ -52,7 +77,7 @@ function MyArray() {
     this.push(arguments[i]);
   }
   // MyArray.isMyArray(arg);  // подсказка: instanceof
-  this.isMyArray = function isMyArray(arg) {
+  MyArray.isMyArray = function isMyArray(arg) {
     return arg instanceof MyArray;
   };
 }
@@ -62,6 +87,3 @@ function MyArray() {
 MyArray.prototype = new MyPrototype();
 const arr1 = new MyArray(1, 2);
 const arr2 = new MyArray(3, 4);
-
-
-
